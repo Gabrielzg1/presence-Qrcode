@@ -38,13 +38,14 @@ public class StudentController  {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Student createStudent(@RequestBody Student student)throws Exception {
-       /* int imageSize = 200;
+        int imageSize = 200;
         BitMatrix matrix = new MultiFormatWriter().encode(student.getRa(), BarcodeFormat.QR_CODE,
                 imageSize, imageSize);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         MatrixToImageWriter.writeToStream(matrix, "png", bos);
         String image = Base64.getEncoder().encodeToString(bos.toByteArray());
-        student.setImg(image);*/
+        String src = "data:image/png;base64," + image;
+        student.setImg(src);
         return this.studentRepository.save(student);
     }
 }
