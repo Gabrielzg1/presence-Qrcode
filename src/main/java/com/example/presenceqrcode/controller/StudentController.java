@@ -21,8 +21,6 @@ import java.util.Optional;
 @RequestMapping("/students")
 public class StudentController  {
 
-   // base64 encode
-
     @Autowired
     private StudentRepository studentRepository;
 
@@ -31,8 +29,8 @@ public class StudentController  {
 
         return this.studentRepository.findAll();
     }
-    @GetMapping("/students/{id}")
-    public Optional<Student> getOne(@PathVariable Long id){
+    @GetMapping("/{id}")
+    public Optional<Student> getOne(@PathVariable("id") Long id){
         return this.studentRepository.findById(id);
     }
     @PostMapping
