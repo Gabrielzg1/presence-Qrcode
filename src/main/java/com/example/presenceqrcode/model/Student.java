@@ -3,6 +3,7 @@ package com.example.presenceqrcode.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -15,6 +16,9 @@ public class Student {
 
     @Column(nullable = false, name="ra", unique=true)
     private String ra;
+
+    @ElementCollection
+    private List<String> subjects;
 
     @Lob
     @Column( length = 100000 )

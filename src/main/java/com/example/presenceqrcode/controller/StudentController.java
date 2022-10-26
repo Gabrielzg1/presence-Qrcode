@@ -45,5 +45,7 @@ public class StudentController  {
         String src = "data:image/png;base64," + image;
         student.setImg(src);
         return this.studentRepository.save(student);
+
+
     }
 }
