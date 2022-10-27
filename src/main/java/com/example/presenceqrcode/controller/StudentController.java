@@ -29,7 +29,6 @@ public class StudentController  {
 
     @GetMapping
     public List<Student> getAll(){
-
         return this.studentRepository.findAll();
     }
     @GetMapping("/{id}")
@@ -39,16 +38,19 @@ public class StudentController  {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Student createStudent(@RequestBody Student student)throws Exception {
+        //Using the algorithm to create the base64 qrcode
         int imageSize = 200;
         BitMatrix matrix = new MultiFormatWriter().encode(student.getRa(), BarcodeFormat.QR_CODE,
                 imageSize, imageSize);
+
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
         MatrixToImageWriter.writeToStream(matrix, "png", bos);
+
         String image = Base64.getEncoder().encodeToString(bos.toByteArray());
+
         String src = "data:image/png;base64," + image;
         student.setImg(src);
         return this.studentRepository.save(student);
-
-
     }
 }
