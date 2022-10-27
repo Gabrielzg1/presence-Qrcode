@@ -21,8 +21,11 @@ import java.util.Optional;
 @RequestMapping("/students")
 public class StudentController  {
 
-    @Autowired
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
+
+    public StudentController(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     @GetMapping
     public List<Student> getAll(){
