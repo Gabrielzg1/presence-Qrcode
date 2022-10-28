@@ -17,7 +17,7 @@ public class Teacher {
     private String subject;
 
     @ElementCollection
-    private List<String> studentsRa;
+    private List<Long> studentsRa;
 
 }
 

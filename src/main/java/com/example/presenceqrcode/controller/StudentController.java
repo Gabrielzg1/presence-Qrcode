@@ -4,15 +4,11 @@ import com.example.presenceqrcode.model.Student;
 import com.example.presenceqrcode.repository.StudentRepository;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -40,7 +36,8 @@ public class StudentController  {
     public Student createStudent(@RequestBody Student student)throws Exception {
         //Using the algorithm to create the base64 qrcode
         int imageSize = 200;
-        BitMatrix matrix = new MultiFormatWriter().encode(student.getRa(), BarcodeFormat.QR_CODE,
+        String img = student.getId().toString();
+        BitMatrix matrix = new MultiFormatWriter().encode(img, BarcodeFormat.QR_CODE,
                 imageSize, imageSize);
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();

@@ -8,14 +8,11 @@ import java.util.List;
 @Data
 @Entity
 public class Student {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     private Long id;
 
     @Column(nullable = false, name="name")
     private String name;
-
-    @Column(nullable = false, name="ra", unique=true)
-    private String ra;
 
     @ElementCollection
     private List<String> subjects;
