@@ -28,8 +28,10 @@ public class StudentController  {
         return this.studentRepository.findAll();
     }
     @GetMapping("/{id}")
-    public Optional<Student> getOne(@PathVariable("id") Long id){
-        return this.studentRepository.findById(id);
+    public Student getOne(@PathVariable("id") Long id){
+        return this.studentRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found!"));
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -57,8 +59,8 @@ public class StudentController  {
         studentRepository.deleteById(id);
     }
 
-    @PutMapping("/{id}")
-    public void update(@RequestBody Student student){
-
+    @PutMapping()
+    public Student update(@RequestBody Student student){
+        return studentRepository.save(student);
     }
 }

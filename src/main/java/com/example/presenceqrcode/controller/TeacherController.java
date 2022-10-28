@@ -5,7 +5,6 @@ import com.example.presenceqrcode.repository.TeacherRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/teachers")
@@ -22,8 +21,10 @@ public class TeacherController  {
         return this.teacherRepository.findAll();
     }
     @GetMapping("/{id}")
-    public Optional<Teacher> getOne(@PathVariable("id") Long id){
-        return this.teacherRepository.findById(id);
+    public Teacher getOne(@PathVariable("id") Long id){
+        return this.teacherRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Teacher not Found"));
     }
 
     @PostMapping
@@ -35,5 +36,19 @@ public class TeacherController  {
     public void delete(@PathVariable("id") Long id) {
         teacherRepository.deleteById(id);
     }
-    
+
+    @GetMapping("/{id}/attendance")
+    public String attendance(@PathVariable("id") Long id){
+        Teacher teacher = teacherRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Teacher not Found"));;
+        List<Long> classmates = teacher.getStudentsRa();
+        for(int i = 0; i < classmates.size(); i++){
+
+        }
+
+
+
+        return "";
+    }
 }
