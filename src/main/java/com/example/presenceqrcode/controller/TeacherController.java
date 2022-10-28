@@ -31,4 +31,9 @@ public class TeacherController  {
     public Teacher createTeacher(@RequestBody Teacher teacher)throws Exception {
         return this.teacherRepository.save(teacher);
     }
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Long id) {
+        teacherRepository.deleteById(id);
+    }
+    
 }

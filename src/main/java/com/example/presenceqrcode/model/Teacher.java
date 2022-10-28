@@ -4,7 +4,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Data // Getters and Setters
 @Entity
 public class Teacher {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)

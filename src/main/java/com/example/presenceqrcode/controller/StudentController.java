@@ -35,7 +35,7 @@ public class StudentController  {
     @ResponseStatus(HttpStatus.CREATED)
     public Student createStudent(@RequestBody Student student)throws Exception {
         //Using the algorithm to create the base64 qrcode
-        int imageSize = 200;
+        int imageSize = 400;
         String img = student.getId().toString();
         BitMatrix matrix = new MultiFormatWriter().encode(img, BarcodeFormat.QR_CODE,
                 imageSize, imageSize);
@@ -49,5 +49,16 @@ public class StudentController  {
         String src = "data:image/png;base64," + image;
         student.setImg(src);
         return this.studentRepository.save(student);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void delete(@PathVariable("id") Long id) {
+        studentRepository.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public void update(@RequestBody Student student){
+
     }
 }
