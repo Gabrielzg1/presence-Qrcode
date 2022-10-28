@@ -23,4 +23,7 @@ public class Student {
     @Lob
     @Column( length = 100000 )
     private String img;
+
+    @Column(nullable = false, name = "presence")
+    private Boolean presence = false;
 }
