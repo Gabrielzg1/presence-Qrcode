@@ -7,6 +7,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.io.ByteArrayOutputStream;
 import java.util.Base64;
@@ -59,8 +60,15 @@ public class StudentController  {
         studentRepository.deleteById(id);
     }
 
-    @PutMapping()
-    public Student update(@RequestBody Student student){
+
+    //FUNCTION TO ASSIGN THE PRESENCE == TRUE
+    @PutMapping("/{id}")
+    public Student update(@PathVariable("id") Long id){
+        Student student = studentRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found!"));
+        student.setPresence(true);
         return studentRepository.save(student);
     }
+
 }
