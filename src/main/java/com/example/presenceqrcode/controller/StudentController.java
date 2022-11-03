@@ -62,13 +62,15 @@ public class StudentController  {
 
 
     //FUNCTION TO ASSIGN THE PRESENCE == TRUE
-    @PutMapping("/{id}")
-    public Student update(@PathVariable("id") Long id){
+    @PutMapping("/presence/{id}")
+    public Student truePresence(@PathVariable("id") Long id, @RequestParam(required = true) Boolean presence){
         Student student = studentRepository
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("Student not found!"));
-        student.setPresence(true);
+        student.setPresence(presence);
         return studentRepository.save(student);
     }
+
+
 
 }
