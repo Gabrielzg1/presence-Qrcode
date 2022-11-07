@@ -16,5 +16,8 @@ public class Teacher {
     @Column(nullable = false, name="subject", unique = true)
     private String subject;
 
+    @ElementCollection
+    private List<Long> studentsRa;
+
 }
 
