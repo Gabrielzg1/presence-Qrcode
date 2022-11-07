@@ -62,7 +62,7 @@ public class StudentController  {
 
 
     //FUNCTION TO ASSIGN THE PRESENCE == TRUE
-    @PutMapping("/presence/{id}")
+    @PutMapping("/{id}")
     public Student truePresence(@PathVariable("id") Long id, @RequestParam(required = true) Boolean presence){
         Student student = studentRepository
                 .findById(id)

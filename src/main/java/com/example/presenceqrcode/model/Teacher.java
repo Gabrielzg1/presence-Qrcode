@@ -7,17 +7,14 @@ import java.util.List;
 @Data // Getters and Setters
 @Entity
 public class Teacher {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Id
+    private String id;
 
     @Column(nullable = false, name="name")
     private String name;
 
     @Column(nullable = false, name="subject", unique = true)
     private String subject;
-
-    @ElementCollection
-    private List<Long> studentsRa;
 
 }
 

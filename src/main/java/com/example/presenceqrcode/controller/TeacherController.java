@@ -21,7 +21,7 @@ public class TeacherController  {
         return this.teacherRepository.findAll();
     }
     @GetMapping("/{id}")
-    public Teacher getOne(@PathVariable("id") Long id){
+    public Teacher getOne(@PathVariable("id") String id){
         return this.teacherRepository
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("Teacher not Found"));
@@ -33,22 +33,8 @@ public class TeacherController  {
         return this.teacherRepository.save(teacher);
     }
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id) {
+    public void delete(@PathVariable("id") String id) {
         teacherRepository.deleteById(id);
     }
 
-    @GetMapping("/{id}/attendance")
-    public String attendance(@PathVariable("id") Long id){
-        Teacher teacher = teacherRepository
-                .findById(id)
-                .orElseThrow(() -> new RuntimeException("Teacher not Found"));;
-        List<Long> classmates = teacher.getStudentsRa();
-        for(int i = 0; i < classmates.size(); i++){
-
-        }
-
-
-
-        return "";
-    }
 }
