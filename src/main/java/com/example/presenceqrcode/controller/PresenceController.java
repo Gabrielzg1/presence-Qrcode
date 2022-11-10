@@ -1,11 +1,12 @@
 package com.example.presenceqrcode.controller;
 
 import com.example.presenceqrcode.model.Presence;
-import com.example.presenceqrcode.model.Student;
 import com.example.presenceqrcode.repository.PresenceRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/presence")
@@ -25,6 +26,8 @@ public class PresenceController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Presence createStudent(@RequestBody Presence presence)throws Exception {
+        LocalDate date = LocalDate.now();
+        presence.setDate(date);
         return this.presenceRepository.save(presence);
     }
 
