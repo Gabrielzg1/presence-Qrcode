@@ -1,22 +1,39 @@
-# Presence-qrcode
+# Backend para Sistema de Validação de Presença via QR Code
 
-[![Build Status](https://travis-ci.org/codecentric/springboot-sample-app.svg?branch=master)](https://travis-ci.org/codecentric/springboot-sample-app)
-[![Coverage Status](https://coveralls.io/repos/github/codecentric/springboot-sample-app/badge.svg?branch=master)](https://coveralls.io/github/codecentric/springboot-sample-app?branch=master)
-[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+## Sobre
 
-[Spring Boot](http://projects.spring.io/spring-boot/) REST API app.
+Este repositório contém o backend de um sistema destinado à validação de presença de alunos em ambientes educacionais utilizando QR Code. O sistema permite que instituições de ensino automatizem o processo de registro de presença, tornando-o mais eficiente e reduzindo as chances de erros manuais.
 
-## Requirements
+## Tecnologias Utilizadas
 
-For building and running the application you need:
+O backend foi desenvolvido com o uso de várias tecnologias e frameworks, incluindo:
 
-- [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-- [Maven 3](https://maven.apache.org)
+- **Spring Boot**: Para facilitar a criação de aplicações stand-alone que podem ser facilmente executadas.
+- **Spring Data JPA**: Para a persistência de dados em SQL com API Java Persistence API.
+- **Spring Web**: Para criar APIs RESTful.
+- **H2 Database**: Um banco de dados em memória para testes e desenvolvimento.
+- **Lombok**: Para reduzir o boilerplate code em objetos Java.
+- **ZXing ("Zebra Crossing")**: Uma biblioteca para gerar e interpretar QR Codes.
+- **JSON**: Para manipulação de dados no formato JSON.
 
-## Running the application locally
+## Configuração e Instalação
 
-There are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method class from your IDE.
+Para executar este projeto localmente, siga os passos abaixo:
 
-## Contribute
+1. Clone o repositório para sua máquina local:
 
-Faça o PULL REQUEST!!!
+2. Abra o projeto no seu IDE de preferência e aguarde a sincronização das dependências Maven.
+
+3. Configure um banco de dados H2 ou outro de sua preferência ajustando o arquivo `application.properties`.
+
+4. Execute o projeto através do IDE 
+
+## Funcionalidades
+
+O sistema de backend oferece funcionalidades como:
+
+- **Geração de QR Codes**: Para cada aula ou evento, um QR Code único é gerado para os alunos escanearem.
+- **Validação de Presença**: Quando um aluno escaneia o QR Code, o sistema valida a presença automaticamente.
+- **Administração de Aulas e Eventos**: Permite a criação e gerenciamento de aulas ou eventos pelos quais os QR Codes são gerados.
+- **Relatórios de Presença**: Geração de relatórios de presença para análise e acompanhamento acadêmico.
+
