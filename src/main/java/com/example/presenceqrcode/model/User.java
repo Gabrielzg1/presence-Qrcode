@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @Entity
-public class Student {
+public class User {
     @Id
     private Long id;
 

@@ -1,45 +1,43 @@
 package com.example.presenceqrcode.controller;
 
-import com.example.presenceqrcode.model.Student;
-import com.example.presenceqrcode.repository.StudentRepository;
+import com.example.presenceqrcode.model.User;
+import com.example.presenceqrcode.repository.UserRepository;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.io.ByteArrayOutputStream;
 import java.util.Base64;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/students")
-public class StudentController  {
+public class UserController {
 
-    private final StudentRepository studentRepository;
+    private final UserRepository userRepository;
 
-    public StudentController(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @GetMapping
-    public List<Student> getAll(){
-        return this.studentRepository.findAll();
+    public List<User> getAll(){
+        return this.userRepository.findAll();
     }
     @GetMapping("/{id}")
-    public Student getOne(@PathVariable("id") Long id){
-        return this.studentRepository
+    public User getOne(@PathVariable("id") Long id){
+        return this.userRepository
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("Student not found!"));
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Student createStudent(@RequestBody Student student)throws Exception {
+    public User createStudent(@RequestBody User user)throws Exception {
         //Using the algorithm to create the base64 qrcode
         int imageSize = 400;
-        String img = student.getId().toString();
+        String img = user.getId().toString();
         BitMatrix matrix = new MultiFormatWriter().encode(img, BarcodeFormat.QR_CODE,
                 imageSize, imageSize);
 
@@ -50,25 +48,25 @@ public class StudentController  {
         String image = Base64.getEncoder().encodeToString(bos.toByteArray());
 
         String src = "data:image/png;base64," + image;
-        student.setImg(src);
-        return this.studentRepository.save(student);
+        user.setImg(src);
+        return this.userRepository.save(user);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
-        studentRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
 
     //FUNCTION TO ASSIGN THE PRESENCE == TRUE
     @PutMapping("/{id}")
-    public Student truePresence(@PathVariable("id") Long id, @RequestParam(required = true) Boolean presence){
-        Student student = studentRepository
+    public User truePresence(@PathVariable("id") Long id, @RequestParam(required = true) Boolean presence){
+        User user = userRepository
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("Student not found!"));
-        student.setPresence(presence);
-        return studentRepository.save(student);
+        user.setPresence(presence);
+        return userRepository.save(user);
     }
 
 
